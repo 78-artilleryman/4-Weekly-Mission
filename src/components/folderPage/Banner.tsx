@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ModalContainer from "@/src/components/Modal/Modal";
 import * as Modal from "@/src/components/Modal/Modal";
 import ModalFoderList from "@/src/components/Modal/ModalFoderList";
-import { useModal } from "../hooks/useModal";
+import { useModal } from "../../hooks/useModal";
 
 const Layout = styled.section`
   width: 100%;

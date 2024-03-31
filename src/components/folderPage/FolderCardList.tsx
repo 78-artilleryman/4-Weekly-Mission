@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import BlankCard from "@/src/components/BlankCard";
 import styled from "styled-components";
 import Card from "@/src/components/Card";
-import { useFolder } from "../context/FolderContext";
+import { useFolder } from "../../context/FolderContext";
 import { LinkType } from "@/src/interface/types";
 import { useRouter } from "next/router";
 import { searchFolderLink } from "@/src/utils/Api";

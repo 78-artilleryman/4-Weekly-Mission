@@ -1,8 +1,8 @@
 import Footer from "@/src/components/Footer";
-import Banner from "./components/Banner";
+import Banner from "../../components/sharedPage/Banner";
 import styled from "styled-components";
 import SearchBar from "@/src/components/SearchBar";
-import ShareCardList from "./components/ShareCardList";
+import ShareCardList from "../../components/sharedPage/ShareCardList";
 import { InferGetServerSidePropsType } from "next";
 import { FoldersType } from "../../interface/types";
 

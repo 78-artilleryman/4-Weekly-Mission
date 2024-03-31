@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import CardItem from "@/src/components/Card";
 import BlankCard from "@/src/components/BlankCard";
-import { LinkType } from "../../../interface/types";
+import { LinkType } from "../../interface/types";
 
 const CardList = styled.div`
   width: 100%;
