@@ -28,22 +28,23 @@ export const getServerSideProps = async () => {
   const BASE_URL = "https://bootcamp-api.codeit.kr/api/";
   // Fetch data from external API
   const res = await fetch(`${BASE_URL}sample/folder`);
-  const repo: FoldersType = await res.json();
+  const repo = await res.json();
+  const { folder } = repo;
   // Pass data to the page via props
-  return { props: { repo } };
+  return { props: { folder } };
 };
 
 function Shared({
-  repo,
+  folder,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
-      <Banner folders={repo} />
+      <Banner folder={folder} />
       <Section>
         <SearchBar />
       </Section>
       <Section>
-        <ShareCardList links={repo?.folder.links} />
+        <ShareCardList links={folder?.links} />
       </Section>
       <Footer />
     </>

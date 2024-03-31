@@ -5,11 +5,13 @@ const BASE_URL = "https://bootcamp-api.codeit.kr/api/";
 export async function getSampeUser(user?: string) {
   try {
     const response = await fetch(`${BASE_URL}users/1`);
+    const responseData = await response.json();
+    const { data } = responseData;
     // HTTP errors
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    return response.json();
+    return data;
   } catch (error) {
     // 네트워크 연결 오류 처리
     console.error("Network error:", error);
@@ -34,10 +36,13 @@ export async function getSampleFolder() {
 export async function getUserFolder() {
   try {
     const response = await fetch(`${BASE_URL}users/1/folders`);
+    const responseData = await response.json();
+    const { data } = responseData;
+
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    return response.json();
+    return data;
   } catch (error) {
     // 네트워크 연결 오류 처리
     console.error("Network error:", error);
@@ -73,18 +78,21 @@ export async function searchFolderLink(
 ) {
   try {
     const linkData = await getFolderLink(id);
+    const { data }: { data: LinkType[] } = linkData;
 
     if (!text) return linkData.data;
 
     if (typeof text === "string") {
       const ChangeText = text.toLowerCase();
 
-      return linkData.data.filter(
-        (data: LinkType) =>
+      const filteredData: LinkType[] = data.filter(
+        (data) =>
           data.title?.toLowerCase().includes(ChangeText) ||
           data.description?.toLowerCase().includes(ChangeText) ||
           data.url?.toLowerCase().includes(ChangeText)
       );
+
+      return filteredData;
     }
   } catch (e: any) {
     console.log(e);

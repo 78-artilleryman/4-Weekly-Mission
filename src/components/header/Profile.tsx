@@ -26,7 +26,7 @@ const UserEmail = styled.p`
 `;
 
 function Profile({ user }: { user: UserType }) {
-  const { email, image_source } = user.data[0];
+  const { email, image_source } = user;
 
   return (
     <Container>

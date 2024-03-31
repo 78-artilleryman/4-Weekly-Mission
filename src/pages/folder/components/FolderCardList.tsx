@@ -26,7 +26,7 @@ const CardList = styled.div`
 
 function FolderCardList() {
   const router = useRouter();
-  const [links, setLinks] = useState([]);
+  const [links, setLinks] = useState<LinkType[]>([]);
 
   const { search } = router.query;
   const { folderFilter } = useFolder();
@@ -41,7 +41,7 @@ function FolderCardList() {
         <BlankCard>저장된 링크가 없습니다</BlankCard>
       ) : (
         <CardList>
-          {links.map((link: any) => (
+          {links.map((link) => (
             <Card key={link.id} cardData={link} />
           ))}
         </CardList>
