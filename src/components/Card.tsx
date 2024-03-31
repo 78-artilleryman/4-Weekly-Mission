@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { formatDate, formatDateAgo } from "@/src/utils/DateUtils";
-import { useModal } from "../pages/folder/hooks/useModal";
+import { useModal } from "../hooks/useModal";
 import ModalContainer from "@/src/components/Modal/Modal";
 import * as Modal from "@/src/components/Modal/Modal";
 import ModalFoderList from "@/src/components/Modal/ModalFoderList";

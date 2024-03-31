@@ -1,4 +1,4 @@
-import { FoldersType } from "../../../interface/types";
+import { FoldersType } from "../../interface/types";
 import React from "react";
 import styled from "styled-components";
 

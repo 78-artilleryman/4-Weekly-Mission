@@ -26,12 +26,10 @@ const UserEmail = styled.p`
 `;
 
 function Profile({ user }: { user: UserType }) {
-  const { email, image_source } = user;
-
   return (
     <Container>
-      <Image src={image_source} alt={image_source} />
-      <UserEmail>{email}</UserEmail>
+      <Image src={user?.image_source} alt="user_logo" />
+      <UserEmail>{user?.email}</UserEmail>
     </Container>
   );
 }
