@@ -50,7 +50,9 @@ function SearchBar() {
 
   const onSubmit = (key: KeyboardEvent<HTMLInputElement>) => {
     if (key.key === "Enter" && value.trim() !== "") {
-      router.push(`/folder?search=${value}`);
+      const queryParams = new URLSearchParams();
+      queryParams.set("search", value.trim());
+      router.push(`/folder?${queryParams.toString()}`);
     }
     if (value.trim() === "") {
       router.push(`/folder`);

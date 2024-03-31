@@ -39,21 +39,20 @@ const FolderName = styled.h2`
   font-weight: 600;
 `;
 
-function FolderTilte({ folders }: { folders: FoldersType | undefined }) {
+function FolderTilte({ folder }: { folder: FoldersType }) {
   return (
     <Layout>
       <Container>
         <div>
           <ProfileImage
             src={
-              folders?.folder?.owner.profileImageSource ??
-              "Icons/default_user_icon.svg"
+              folder?.owner.profileImageSource ?? "Icons/default_user_icon.svg"
             }
             alt="image"
           />
-          <ProfileName>@{folders?.folder?.owner.name}</ProfileName>
+          <ProfileName>@{folder?.owner.name}</ProfileName>
         </div>
-        <FolderName>{folders?.folder?.name}</FolderName>
+        <FolderName>{folder?.name}</FolderName>
       </Container>
     </Layout>
   );

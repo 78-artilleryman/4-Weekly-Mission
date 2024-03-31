@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import FolderCategoryItem from "./FolderCategoryItem";
 import { FolderCategoryType } from "@/src/interface/types";
-import { InferGetServerSidePropsType } from "next";
 import { useEffect, useState } from "react";
 import { getUserFolder } from "@/src/utils/Api";
 
@@ -15,7 +14,7 @@ const FolderCategory = styled.div`
 `;
 
 function FolderCategoryList() {
-  const [folders, setFolders] = useState<FolderCategoryType>();
+  const [folders, setFolders] = useState<FolderCategoryType[]>([]);
 
   useEffect(() => {
     getUserFolder().then(setFolders);
@@ -24,7 +23,7 @@ function FolderCategoryList() {
   return (
     <FolderCategory>
       <FolderCategoryItem id={null}>전체</FolderCategoryItem>
-      {folders?.data.map((folder) => (
+      {folders?.map((folder) => (
         <FolderCategoryItem key={folder.id} {...folder}>
           {folder.name}
         </FolderCategoryItem>

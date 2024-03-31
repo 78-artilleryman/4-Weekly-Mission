@@ -12,11 +12,11 @@ const FolderList = styled.div`
 `;
 
 function ModalFoderList() {
-  const [folders, setFolders] = useState<FolderCategoryType>();
+  const [folders, setFolders] = useState<FolderCategoryType[]>([]);
 
   const [currentFolder, setCurrentFolder] = useState(1);
-  const handleClickTag = (folder: any) => {
-    setCurrentFolder(folder.id);
+  const handleClickTag = (folder: number) => {
+    setCurrentFolder(folder);
   };
 
   useEffect(() => {
@@ -27,11 +27,11 @@ function ModalFoderList() {
     <>
       {folders && (
         <FolderList>
-          {folders.data.map((folder) => (
+          {folders.map((folder) => (
             <ModalFolderItem
               key={folder.id}
               folder={folder}
-              onClick={() => handleClickTag(folder)}
+              onClick={() => handleClickTag(folder.id)}
               selected={currentFolder === folder.id}
             />
           ))}

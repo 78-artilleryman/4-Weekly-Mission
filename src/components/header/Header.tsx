@@ -3,7 +3,6 @@ import Profile from "./Profile";
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
-import { InferGetServerSidePropsType } from "next";
 import { UserType } from "@/src/interface/types";
 import logo from "@/public/Icons/logo.svg";
 import { getSampeUser } from "@/src/utils/Api";
@@ -57,7 +56,7 @@ const LoginButton = styled.button`
 `;
 
 function Header() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<UserType[]>([]);
 
   useEffect(() => {
     getSampeUser().then(setUser);
@@ -68,7 +67,7 @@ function Header() {
         <Link href="/">
           <Image src={logo} alt="Header_logo" />
         </Link>
-        {user ? <Profile user={user} /> : <LoginButton>로그인</LoginButton>}
+        {user ? <Profile user={user[0]} /> : <LoginButton>로그인</LoginButton>}
       </Layout>
     </Container>
   );

@@ -23,12 +23,6 @@ const IconText = styled.span`
   text-align: center;
 `;
 
-declare global {
-  interface Window {
-    kakao: any;
-  }
-}
-
 function SocialIcons({ id }: { id: number | null }) {
   const shareUrl = `${window.location.origin}/shared/${id}`;
 
@@ -40,10 +34,10 @@ function SocialIcons({ id }: { id: number | null }) {
       Kakao.init(process.env.REACT_APP_KAKAO_KEY);
       window.kakao.isInitialized();
     }
-  }, []);
+  }, [Kakao]);
 
   const handleKakao = () => {
-    Kakao.Share.sendDefault({
+    Kakao?.Share.sendDefault({
       objectType: "feed",
       content: {
         title: "Linkbrary",
