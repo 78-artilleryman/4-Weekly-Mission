@@ -52,6 +52,13 @@ function SigninPage() {
     },
   });
 
+  const passwordValidation = register("userPw", {
+    required: {
+      value: true,
+      message: "비밀번호를 입력해 주세요",
+    },
+  });
+
   const onSubmit = async (data: any) => {
     console.log(data);
   };
@@ -76,12 +83,20 @@ function SigninPage() {
             )}
           </div>
 
-          <Input
-            label="비밀번호"
-            id="user_pw"
-            type="password"
-            placeholder="비밀번호를 입력해 주세요"
-          ></Input>
+          <div>
+            <Input
+              label="비밀번호"
+              id="userPw"
+              type="password"
+              placeholder="비밀번호를 입력해 주세요"
+              validation={passwordValidation}
+            />
+            {errors && (
+              <ErrorMesage
+                text={errors.userPw?.message?.toString()}
+              ></ErrorMesage>
+            )}
+          </div>
           <SubmitBtn>로그인</SubmitBtn>
         </Form>
         <SocialBox text="소셜 로그인" />
