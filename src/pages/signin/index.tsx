@@ -5,6 +5,7 @@ import SubmitBtn from "@/src/components/signinPage/SubmitBtn";
 import LogoBox from "@/src/components/signinPage/LogoBox";
 import { useForm } from "react-hook-form";
 import SocialBox from "@/src/components/signinPage/SocialBox";
+import ErrorMesage from "@/src/components/signinPage/ErrorMesage";
 
 const BackGround = styled.div`
   width: 100%;
@@ -34,17 +35,47 @@ const Form = styled.form`
 `;
 
 function SigninPage() {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const emailValidation = register("userEmail", {
+    required: {
+      value: true,
+      message: "이메일을 입력해 주세요",
+    },
+    pattern: {
+      value: /^\S+@\S+$/i,
+      message: "올바른 이메일 주소가 아닙니다.",
+    },
+  });
+
+  const onSubmit = async (data: any) => {
+    console.log(data);
+  };
+
   return (
     <BackGround>
       <Layout>
         <LogoBox text="회원이 아니신가요?" linkText="회원 가입하기" />
-        <Form action="">
-          <Input
-            label="이메일"
-            id="user_email"
-            type="email"
-            placeholder="이메일을 입력해 주세요"
-          ></Input>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <Input
+              label="이메일"
+              id="userEmail"
+              type="email"
+              placeholder="이메일을 입력해 주세요"
+              validation={emailValidation}
+            />
+            {errors && (
+              <ErrorMesage
+                text={errors.userEmail?.message?.toString()}
+              ></ErrorMesage>
+            )}
+          </div>
+
           <Input
             label="비밀번호"
             id="user_pw"

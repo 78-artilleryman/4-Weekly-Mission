@@ -3,7 +3,7 @@ import React, { InputHTMLAttributes, RefObject, useRef, useState } from "react";
 import styled from "styled-components";
 import setPwOff from "@/public/Icons/eye-off.svg";
 import setPwOn from "@/public/Icons/eye-on.svg";
-import { useForm } from "react-hook-form";
+import { UseFormRegisterReturn, UseFormReturn, useForm } from "react-hook-form";
 
 type InputStyledProps = {
   $error?: boolean;
@@ -15,6 +15,7 @@ const Layout = styled.div`
   flex-direction: column;
   gap: 12px;
   position: relative;
+  margin-bottom: 6px;
 `;
 
 const Label = styled.label`
@@ -45,27 +46,24 @@ const ImgPosition = styled.div`
   right: 18px;
 `;
 
-const ErrorMesage = styled.p`
-  color: #ff5b56;
-  font-size: 14px;
-  font-weight: 400;
-`;
-
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   placeholder: string;
   error?: boolean;
-  label: string;
+  label?: string;
+  validation?: UseFormRegisterReturn;
 }
 
-function Input({ id, type = "text", placeholder, error, label }: InputProps) {
+function Input({
+  id,
+  type = "text",
+  placeholder,
+  error,
+  label,
+  validation,
+}: InputProps) {
   const [pwState, setPwState] = useState(false);
   const passwordRef = useRef<HTMLInputElement>(null);
-
-  const {
-    register,
-    formState: { errors },
-  } = useForm();
 
   const toggleEyesButton = () => {
     if (passwordRef.current) {
@@ -84,11 +82,11 @@ function Input({ id, type = "text", placeholder, error, label }: InputProps) {
       <Layout>
         <Label htmlFor={id}>{label}</Label>
         <InputForm
+          id={id}
           type={type}
-          {...register(id, { required: true })}
           placeholder={placeholder}
-          ref={passwordRef}
           $error={error}
+          {...validation}
         />
         {type === "password" && (
           <ImgPosition onClick={toggleEyesButton}>
@@ -100,9 +98,6 @@ function Input({ id, type = "text", placeholder, error, label }: InputProps) {
           </ImgPosition>
         )}
       </Layout>
-      {errors.category?.type === "required" && (
-        <ErrorMesage>필수 입력사항입니다.</ErrorMesage>
-      )}
     </>
   );
 }
