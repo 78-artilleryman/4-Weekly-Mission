@@ -10,7 +10,7 @@ type InputStyledProps = {
 };
 
 const Layout = styled.div`
-  width: 400px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 12px;

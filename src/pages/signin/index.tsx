@@ -20,9 +20,14 @@ const Layout = styled.div`
   align-items: center;
   margin: 0 auto;
   gap: 30px;
+
+  @media (max-width: 767px) {
+    width: 325px;
+  }
 `;
 
 const Form = styled.form`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 30px;
