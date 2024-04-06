@@ -8,7 +8,7 @@ import SocialBox from "@/src/components/signinPage/SocialBox";
 
 const BackGround = styled.div`
   width: 100%;
-  padding: 100px 0px 200px 0px;
+  padding: 80px 0px 180px 0px;
   margin: 0 auto;
   background: var(--Linkbrary-bg, #f0f6ff);
 `;
@@ -33,11 +33,11 @@ const Form = styled.form`
   gap: 30px;
 `;
 
-function SigninPage() {
+function index() {
   return (
     <BackGround>
       <Layout>
-        <LogoBox text="회원이 아니신가요?" linkText="회원 가입하기" />
+        <LogoBox text="이미 회원이신가요?" linkText="로그인하기" />
         <Form action="">
           <Input
             label="이메일"
@@ -49,14 +49,20 @@ function SigninPage() {
             label="비밀번호"
             id="user_pw"
             type="password"
-            placeholder="비밀번호를 입력해 주세요"
+            placeholder="영문, 숫자를 조합해 8자 이상 입력해 주세요"
           ></Input>
-          <SubmitBtn>로그인</SubmitBtn>
+          <Input
+            label="비밀번호 확인"
+            id="user_pw_ch"
+            type="password"
+            placeholder="비밀번호와 일치하는 값을 입력해 주세요"
+          ></Input>
+          <SubmitBtn>회원가입</SubmitBtn>
         </Form>
-        <SocialBox text="소셜 로그인" />
+        <SocialBox text="다른 방식으로 가입하기" />
       </Layout>
     </BackGround>
   );
 }
 
-export default SigninPage;
+export default index;

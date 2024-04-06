@@ -25,16 +25,21 @@ const LinkStyle = {
   fontWeight: 600,
 };
 
-function LogoBox() {
+interface LogoBox {
+  text: string;
+  linkText: string;
+}
+
+function LogoBox({ text, linkText }: LogoBox) {
   return (
     <Layout>
       <Link href={`/`}>
         <Image src={logo} alt="logo" width={210} height={38}></Image>
       </Link>
       <Text>
-        회원이 아니신가요?{" "}
+        {text}{" "}
         <Link style={LinkStyle} href={`/`}>
-          회원 가입하기
+          {linkText}
         </Link>
       </Text>
     </Layout>

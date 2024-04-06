@@ -27,10 +27,10 @@ const SocialLinks = styled.div`
   gap: 16px;
 `;
 
-function SocialBox() {
+function SocialBox({ text }: { text: string }) {
   return (
     <Layout>
-      <Text>소셜 로그인</Text>
+      <Text>{text}</Text>
       <SocialLinks>
         <Image src={googleIcon} alt="google"></Image>
         <Image src={kakao} alt="kakao"></Image>
