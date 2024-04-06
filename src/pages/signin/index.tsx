@@ -4,10 +4,11 @@ import styled from "styled-components";
 import SubmitBtn from "@/src/components/signinPage/SubmitBtn";
 import LogoBox from "@/src/components/signinPage/LogoBox";
 import { useForm } from "react-hook-form";
+import SocialBox from "@/src/components/signinPage/SocialBox";
 
 const BackGround = styled.div`
   width: 100%;
-  padding: 150px 0px 253px 0px;
+  padding: 100px 0px 200px 0px;
   margin: 0 auto;
   background: var(--Linkbrary-bg, #f0f6ff);
 `;
@@ -18,6 +19,7 @@ const Layout = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
+  gap: 30px;
 `;
 
 const Form = styled.form`
@@ -25,6 +27,7 @@ const Form = styled.form`
   flex-direction: column;
   gap: 30px;
 `;
+
 function SigninPage() {
   return (
     <BackGround>
@@ -45,6 +48,7 @@ function SigninPage() {
           ></Input>
           <SubmitBtn>로그인</SubmitBtn>
         </Form>
+        <SocialBox />
       </Layout>
     </BackGround>
   );
