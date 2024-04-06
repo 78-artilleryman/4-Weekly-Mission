@@ -1,8 +1,9 @@
 import Image from "next/image";
-import React, { InputHTMLAttributes, ReactNode, useRef, useState } from "react";
+import React, { InputHTMLAttributes, RefObject, useRef, useState } from "react";
 import styled from "styled-components";
 import setPwOff from "@/public/Icons/eye-off.svg";
 import setPwOn from "@/public/Icons/eye-on.svg";
+import { useForm } from "react-hook-form";
 
 type InputStyledProps = {
   $error?: boolean;
@@ -51,12 +52,20 @@ const ErrorMesage = styled.p`
 `;
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  error: boolean;
+  id: string;
+  placeholder: string;
+  error?: boolean;
+  label: string;
 }
 
-function Input({ id, type = "text", placeholder, error }: InputProps) {
+function Input({ id, type = "text", placeholder, error, label }: InputProps) {
   const [pwState, setPwState] = useState(false);
   const passwordRef = useRef<HTMLInputElement>(null);
+
+  const {
+    register,
+    formState: { errors },
+  } = useForm();
 
   const toggleEyesButton = () => {
     if (passwordRef.current) {
@@ -73,10 +82,10 @@ function Input({ id, type = "text", placeholder, error }: InputProps) {
   return (
     <>
       <Layout>
-        <Label htmlFor={id}></Label>
+        <Label htmlFor={id}>{label}</Label>
         <InputForm
-          id={id}
           type={type}
+          {...register(id, { required: true })}
           placeholder={placeholder}
           ref={passwordRef}
           $error={error}
@@ -91,7 +100,9 @@ function Input({ id, type = "text", placeholder, error }: InputProps) {
           </ImgPosition>
         )}
       </Layout>
-      {error && <ErrorMesage>test</ErrorMesage>}
+      {errors.category?.type === "required" && (
+        <ErrorMesage>필수 입력사항입니다.</ErrorMesage>
+      )}
     </>
   );
 }

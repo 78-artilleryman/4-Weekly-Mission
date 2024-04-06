@@ -52,7 +52,11 @@ function SearchBar() {
     if (key.key === "Enter" && value.trim() !== "") {
       const queryParams = new URLSearchParams();
       queryParams.set("search", value.trim());
-      router.push(`/folder?${queryParams.toString()}`);
+      console.log(queryParams.toString());
+      router.push({
+        pathname: "/folder",
+        query: `${queryParams.toString()}`,
+      });
     }
     if (value.trim() === "") {
       router.push(`/folder`);
@@ -67,7 +71,7 @@ function SearchBar() {
     <Container>
       <Icon src="Icons/Search.svg" alt="Search" />
       <Input
-        type="text"
+        type="search"
         value={value}
         onChange={onChange}
         placeholder="링크를 검색해 보세요."
