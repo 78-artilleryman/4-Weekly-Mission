@@ -1,3 +1,4 @@
+import axios from "axios";
 import { LinkType } from "../interface/types";
 
 const BASE_URL = "https://bootcamp-api.codeit.kr/api/";
@@ -96,5 +97,32 @@ export async function searchFolderLink(
     }
   } catch (e: any) {
     console.log(e);
+  }
+}
+
+interface FormdataType {
+  userEmail: string;
+  userPw: string;
+}
+
+export async function loginRequest(formdata: FormdataType) {
+  try {
+    const response = await axios.post(`${BASE_URL}sign-in`, {
+      email: formdata.userEmail,
+      password: formdata.userPw,
+    });
+
+    if (response.status === 200) {
+      const res = response.data;
+      return res;
+    } else if (response.status === 400) {
+      console.log("없는 유저 정보");
+    } else if (response.status === 500) {
+      console.log("서버에러");
+    }
+  } catch (error) {
+    // 네트워크 연결 오류 처리
+    console.error("Network error:", error);
+    return null;
   }
 }

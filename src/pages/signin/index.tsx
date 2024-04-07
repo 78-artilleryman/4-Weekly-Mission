@@ -6,6 +6,8 @@ import LogoBox from "@/src/components/signinPage/LogoBox";
 import { useForm } from "react-hook-form";
 import SocialBox from "@/src/components/signinPage/SocialBox";
 import ErrorMesage from "@/src/components/signinPage/ErrorMesage";
+import { loginRequest } from "@/src/utils/Api";
+import { useRouter } from "next/router";
 
 const BackGround = styled.div`
   width: 100%;
@@ -35,6 +37,8 @@ const Form = styled.form`
 `;
 
 function SigninPage() {
+  const router = useRouter();
+
   const {
     register,
     formState: { errors },
@@ -60,7 +64,13 @@ function SigninPage() {
   });
 
   const onSubmit = async (data: any) => {
-    console.log(data);
+    const res = await loginRequest(data);
+
+    if (res) {
+      const { data } = res;
+      window.localStorage.setItem("accessToken", data.accessToken);
+      router.push("/folder");
+    }
   };
 
   return (
