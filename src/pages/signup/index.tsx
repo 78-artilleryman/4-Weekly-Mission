@@ -6,7 +6,7 @@ import LogoBox from "@/src/components/signinPage/LogoBox";
 import { useForm } from "react-hook-form";
 import SocialBox from "@/src/components/signinPage/SocialBox";
 import ErrorMesage from "@/src/components/signinPage/ErrorMesage";
-import { signupRequest } from "@/src/utils/Api";
+import { chechEmail, signupRequest } from "@/src/utils/Api";
 import { useRouter } from "next/router";
 
 const BackGround = styled.div`
@@ -54,6 +54,10 @@ function SignupPage() {
     pattern: {
       value: /^\S+@\S+$/i,
       message: "올바른 이메일 주소가 아닙니다.",
+    },
+    validate: async (value) => {
+      const res = await chechEmail(value);
+      if (!res) return "이미 존재하는 이메일입니다.";
     },
   });
 
