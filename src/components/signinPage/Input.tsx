@@ -64,19 +64,10 @@ function Input({
   validation,
 }: InputProps) {
   const [pwState, setPwState] = useState(false);
-  const passwordRef = useRef<HTMLInputElement>(null);
   const error = errors[id];
 
   const toggleEyesButton = () => {
-    if (passwordRef.current) {
-      if (pwState) {
-        passwordRef.current.type = "text";
-        setPwState(false);
-      } else {
-        passwordRef.current.type = "password";
-        setPwState(true);
-      }
-    }
+    setPwState((prev) => !prev);
   };
 
   return (
@@ -85,7 +76,7 @@ function Input({
         <Label htmlFor={id}>{label}</Label>
         <InputForm
           id={id}
-          type={type}
+          type={pwState ? "password" : "text"}
           placeholder={placeholder}
           $error={!!error}
           {...validation}
@@ -93,9 +84,9 @@ function Input({
         {type === "password" && (
           <ImgPosition onClick={toggleEyesButton}>
             {pwState ? (
-              <Image src={setPwOff} alt="Pw-off" />
-            ) : (
               <Image src={setPwOn} alt="Pw-on" />
+            ) : (
+              <Image src={setPwOff} alt="Pw-off" />
             )}
           </ImgPosition>
         )}
