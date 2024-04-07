@@ -5,7 +5,6 @@ import SubmitBtn from "@/src/components/signinPage/SubmitBtn";
 import LogoBox from "@/src/components/signinPage/LogoBox";
 import { useForm } from "react-hook-form";
 import SocialBox from "@/src/components/signinPage/SocialBox";
-import ErrorMesage from "@/src/components/signinPage/ErrorMesage";
 import { chechEmail, signupRequest } from "@/src/utils/Api";
 import { useRouter } from "next/router";
 
@@ -103,36 +102,24 @@ function SignupPage() {
             type="email"
             placeholder="이메일을 입력해 주세요"
             validation={emailValidation}
+            errors={errors}
           />
-          {errors && (
-            <ErrorMesage
-              text={errors.userEmail?.message?.toString()}
-            ></ErrorMesage>
-          )}
           <Input
             label="비밀번호"
             id="userPw"
             type="password"
             placeholder="영문, 숫자를 조합해 8자 이상 입력해 주세요"
             validation={passwordValidation}
+            errors={errors}
           />
-          {errors && (
-            <ErrorMesage
-              text={errors.userPw?.message?.toString()}
-            ></ErrorMesage>
-          )}
           <Input
             label="비밀번호 확인"
             id="userPwCh"
             type="password"
             placeholder="비밀번호와 일치하는 값을 입력해 주세요"
             validation={passwordCheckValidation}
+            errors={errors}
           />
-          {errors && (
-            <ErrorMesage
-              text={errors.userPwCh?.message?.toString()}
-            ></ErrorMesage>
-          )}
           <SubmitBtn>회원가입</SubmitBtn>
         </Form>
         <SocialBox text="다른 방식으로 가입하기" />

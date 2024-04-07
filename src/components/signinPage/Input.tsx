@@ -3,7 +3,8 @@ import React, { InputHTMLAttributes, RefObject, useRef, useState } from "react";
 import styled from "styled-components";
 import setPwOff from "@/public/Icons/eye-off.svg";
 import setPwOn from "@/public/Icons/eye-on.svg";
-import { UseFormRegisterReturn, UseFormReturn, useForm } from "react-hook-form";
+import { FieldErrors, UseFormRegisterReturn, useForm } from "react-hook-form";
+import ErrorMesage from "./ErrorMesage";
 
 type InputStyledProps = {
   $error?: boolean;
@@ -49,7 +50,7 @@ const ImgPosition = styled.div`
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   placeholder: string;
-  error?: boolean;
+  errors: FieldErrors;
   label?: string;
   validation?: UseFormRegisterReturn;
 }
@@ -58,12 +59,13 @@ function Input({
   id,
   type = "text",
   placeholder,
-  error,
+  errors,
   label,
   validation,
 }: InputProps) {
   const [pwState, setPwState] = useState(false);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const error = errors[id];
 
   const toggleEyesButton = () => {
     if (passwordRef.current) {
@@ -85,7 +87,7 @@ function Input({
           id={id}
           type={type}
           placeholder={placeholder}
-          $error={error}
+          $error={!!error}
           {...validation}
         />
         {type === "password" && (
@@ -98,6 +100,7 @@ function Input({
           </ImgPosition>
         )}
       </Layout>
+      {errors && <ErrorMesage text={error?.message?.toString()} />}
     </>
   );
 }

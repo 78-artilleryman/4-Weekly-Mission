@@ -43,6 +43,7 @@ function SigninPage() {
     register,
     formState: { errors },
     handleSubmit,
+    setError,
   } = useForm({ mode: "onBlur" });
 
   const emailValidation = register("userEmail", {
@@ -70,6 +71,9 @@ function SigninPage() {
       const { data } = res;
       window.localStorage.setItem("accessToken", data.accessToken);
       router.push("/folder");
+    } else {
+      setError("userEmail", { message: "이메일을 확인해주세요" });
+      setError("userPw", { message: "비밀번호를 확인해주세요" });
     }
   };
 
@@ -85,12 +89,8 @@ function SigninPage() {
               type="email"
               placeholder="이메일을 입력해 주세요"
               validation={emailValidation}
+              errors={errors}
             />
-            {errors && (
-              <ErrorMesage
-                text={errors.userEmail?.message?.toString()}
-              ></ErrorMesage>
-            )}
           </div>
 
           <div>
@@ -100,12 +100,8 @@ function SigninPage() {
               type="password"
               placeholder="비밀번호를 입력해 주세요"
               validation={passwordValidation}
+              errors={errors}
             />
-            {errors && (
-              <ErrorMesage
-                text={errors.userPw?.message?.toString()}
-              ></ErrorMesage>
-            )}
           </div>
           <SubmitBtn>로그인</SubmitBtn>
         </Form>
