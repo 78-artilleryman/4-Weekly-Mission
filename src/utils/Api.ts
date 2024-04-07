@@ -126,3 +126,25 @@ export async function loginRequest(formdata: FormdataType) {
     return null;
   }
 }
+
+export async function signupRequest(formdata: FormdataType) {
+  try {
+    const response = await axios.post(`${BASE_URL}sign-in`, {
+      email: formdata.userEmail,
+      password: formdata.userPw,
+    });
+
+    if (response.status === 200) {
+      const res = response.data;
+      return res;
+    } else if (response.status === 400) {
+      console.log("잘 못 된 정보를 입력했습니다.");
+    } else if (response.status === 500) {
+      console.log("서버에러");
+    }
+  } catch (error) {
+    // 네트워크 연결 오류 처리
+    console.error("Network error:", error);
+    return null;
+  }
+}
