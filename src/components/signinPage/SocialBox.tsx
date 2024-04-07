@@ -3,6 +3,7 @@ import React from "react";
 import googleIcon from "@/public/Icons/google.svg";
 import kakao from "@/public/Icons/kakaolg.svg";
 import styled from "styled-components";
+import Link from "next/link";
 
 const Layout = styled.div`
   width: 100%;
@@ -32,8 +33,12 @@ function SocialBox({ text }: { text: string }) {
     <Layout>
       <Text>{text}</Text>
       <SocialLinks>
-        <Image src={googleIcon} alt="google"></Image>
-        <Image src={kakao} alt="kakao"></Image>
+        <Link href="https://www.google.com">
+          <Image src={googleIcon} alt="google"></Image>
+        </Link>
+        <Link href="https://www.kakaocorp.com/page">
+          <Image src={kakao} alt="kakao"></Image>
+        </Link>
       </SocialLinks>
     </Layout>
   );
