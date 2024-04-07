@@ -43,7 +43,7 @@ function SigninPage() {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
 
   const emailValidation = register("userEmail", {
     required: {
